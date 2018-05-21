@@ -12,6 +12,7 @@ import java.awt.font.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.KeyEventDispatcher;
+import block.controller.MKeyListener;
 
 public class BlockGamePanel extends JPanel
 {
@@ -24,6 +25,7 @@ public class BlockGamePanel extends JPanel
 	private int cols = 60;
 	public int levelNumber = 0;
 	private JButton nextButton;
+	private Boolean active = true;
 	
 	
 	
@@ -46,6 +48,7 @@ public class BlockGamePanel extends JPanel
 		table.setGridColor(Color.DARK_GRAY);
 		table.setRowHeight(15);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setEnabled(false);
 		for (int i = 0; i < table.getColumnCount(); i++)
 		{
 			table.getColumnModel().getColumn(i).setPreferredWidth(10);
@@ -89,6 +92,7 @@ public class BlockGamePanel extends JPanel
 	
 	private void setupListeners()
 	{
+		
 		nextButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent click)
