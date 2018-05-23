@@ -1,20 +1,18 @@
 package block.view;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 
 import block.controller.BlockController;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.font.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.KeyEventDispatcher;
-import block.controller.MKeyListener;
+import java.awt.event.KeyListener;
 
-public class BlockGamePanel extends JPanel
+public class BlockGamePanel extends JPanel implements KeyListener
 {
 	private BlockController appController;
 	private JLabel levelLabel;
@@ -26,6 +24,8 @@ public class BlockGamePanel extends JPanel
 	public int levelNumber = 0;
 	private JButton nextButton;
 	private Boolean active = true;
+	private int currentPlayerRow;
+	private int currentPlayerCol;
 	
 	
 	
@@ -33,7 +33,6 @@ public class BlockGamePanel extends JPanel
 	{
 		super();
 		this.appController = appController;
-		setupGrid();
 		levelLabel = new JLabel();
 		levelLabel.setEnabled(false);
 		levelLabel.setForeground(Color.BLACK);
@@ -55,10 +54,11 @@ public class BlockGamePanel extends JPanel
 		}
 		
 		
+		
 		nextButton = new JButton("Next Level");
 		
 		
-		
+		addKeyListener(this);
 		setupPanel();
 		setupLayout();
 		setupListeners();
@@ -101,16 +101,7 @@ public class BlockGamePanel extends JPanel
 			}
 		});
 		
-	}
-	private void setupGrid()
-	{
-//		for(int i = 0; i >= 60; i++)
-//		{
-//			for(int h = 0; h >=60; h++)
-//			{
-//				grid[i][h] = Color.WHITE;
-//			}
-//		}
+		
 	}
 	public void nextLevel()
 	{
@@ -133,6 +124,40 @@ public class BlockGamePanel extends JPanel
 	public void moveRight()
 	{
 		
+	}
+	public void keyReleased(KeyEvent evt)
+	{
+		//unused
+	}
+	public void keyTyped(KeyEvent evt)
+	{
+		//unused
+	}
+	public void keyPressed(KeyEvent evt)
+	{
+		
+		int ch = evt.getKeyCode();
+		if (ch == KeyEvent.VK_A || ch == KeyEvent.VK_LEFT)
+		{
+			System.out.println("Left");
+		}
+		else if (ch == KeyEvent.VK_S || ch == KeyEvent.VK_DOWN)
+		{
+			System.out.println("Down");
+		}
+		else if (ch == KeyEvent.VK_D || ch == KeyEvent.VK_RIGHT)
+		{
+			System.out.println("Right");
+		}
+		else if (ch == KeyEvent.VK_W || ch == KeyEvent.VK_UP)
+		{
+			System.out.println("Up");
+		}
+		
+	}
+	public boolean isFocusTraversable()
+	{
+		return true;
 	}
 	
 }
